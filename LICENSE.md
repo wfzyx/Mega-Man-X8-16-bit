@@ -1,5 +1,5 @@
-
 X8 16-bit License
+
 Copyright (c) 2024 Alysson da Paz
 
 X8 16-bit is free to use, modify, and distribute, but not to be used for monetization in any way, including but not limited to accepting donations, memberships, subscriptions, ad revenues, Patreon support, Ko-fi, or similar venues. This prohibition also extends to any team members working on any project that uses this code or part of it.
