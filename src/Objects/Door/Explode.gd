@@ -35,7 +35,7 @@ func damage(_d,_s) -> float:
 
 func _on_bike_detector_body_entered(body: Node) -> void:
 	if not exploded:
-		if body.is_in_group("Props"):
+		if body.is_in_group("Props") and "RideChaser" in body.get_character().name:
 			if abs(body.get_character().get_actual_horizontal_speed() ) > 325:
 				_on_signal()
 				call_deferred("destroy_bike",body)

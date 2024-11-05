@@ -254,11 +254,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/System/CheckpointSettings.gd"
 }, {
-"base": "Node2D",
-"class": "ClasseDoLulaJR",
-"language": "GDScript",
-"path": "res://_deleteme.gd"
-}, {
 "base": "GenericProjectile",
 "class": "ClawAttack",
 "language": "GDScript",
@@ -889,7 +884,6 @@ _global_script_class_icons={
 "Charge": "",
 "ChargedBuster": "",
 "CheckpointSettings": "",
-"ClasseDoLulaJR": "",
 "ClawAttack": "",
 "Command": "",
 "CommandList": "",
