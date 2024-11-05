@@ -19,7 +19,7 @@ func _ready() -> void:
 	character.listen("wallslide",self,"reset_airdash_count")
 	character.listen("walljump",self,"reset_airdash_count")
 	character.listen("dashjump",self,"reduce_airdash_count")
-	character.listen("firedash",self,"reduce_airdash_count")
+	character.listen("firedash",self,"firedash_reduce_airdash_count")
 	#character.listen("jump",self,"reset_airdash_count")
 
 func _Setup() -> void:
@@ -39,11 +39,14 @@ func reset_airdash_count() -> void:
 	$label.text = str(airdash_count)
 	Log("Resetting airdashes")
 	
-func reduce_airdash_count() -> void:
+func firedash_reduce_airdash_count():
 	if not character.is_on_floor():
-		airdash_count -= 1
-		$label.text = str(airdash_count)
-		Log("Reducing airdashes on dashjump signal to " + str(airdash_count))
+		reduce_airdash_count()
+	
+func reduce_airdash_count() -> void:
+	airdash_count -= 1
+	$label.text = str(airdash_count)
+	Log("Reducing airdashes on dashjump signal to " + str(airdash_count))
 
 func should_dash() -> bool:
 	if not has_let_go_of_input:
