@@ -6,7 +6,7 @@ X8 16-bit is free to use, modify, and distribute, but not to be used for monetiz
 
 Any derivative works must not be named in a way that could mislead users into believing it is the original X8 16-bit or an extended or enhanced version of it. Do not use names such as "Definitive", "Enhanced", "Extended", "Plus", or similar. Instead, use a naming convention that makes it clear that it is another version. For example: "X8 16-bit: Vile's Revenge", "X8 16-bit: L's Edition" or something similar.
 
-All derivatives must also follow the same rules and must disclose their code to the public as to encourage further fan projects based on X8 16-bit.
+Alysson da Paz's signature and the entirety of the credits must be included in any derivative works. They also must follow the same rules and disclose their code to the public as to encourage further fan projects based on X8 16-bit.
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
