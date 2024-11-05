@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_animation_importer"
+type="SpriteFrames"
+path="res://.import/better_lemon.ase-6c471b98779702282a3ec477b53bb7fa.res"
+
+[deps]
+
+source_file="res://src/Actors/Weapons/better_lemon.ase"
+dest_files=[ "res://.import/better_lemon.ase-6c471b98779702282a3ec477b53bb7fa.res" ]
+
+[params]
+
+extrude=false
+default_direction="Forward"
+default_loop=false
