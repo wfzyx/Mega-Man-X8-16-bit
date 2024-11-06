@@ -53,3 +53,7 @@ Thumbs.db
 Godot_v3.6-stable_x11.64
 src/Localization/*
 .vscode/settings.json
+src/Localization/test1.br.translation
+src/Localization/test1.en.translation
+src/Localization/test1.es.translation
+src/Localization/test1.pr.translation
