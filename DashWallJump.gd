@@ -1,5 +1,5 @@
 extends WallJump
-class_name DashWallJump #almost the same as DashJump
+class_name DashWallJump # almost the same as DashJump
 var override_timer := 0.0
 var overridden := false
 
@@ -65,4 +65,3 @@ func _ResetCondition() -> bool:
 			return true
 			
 	return false
-

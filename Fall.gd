@@ -2,7 +2,7 @@ extends Movement
 class_name Fall
 
 
-export var shot_pos_adjust := Vector2 (4,-5)
+export var shot_pos_adjust := Vector2(4, -5)
 
 
 func get_shot_adust_position() -> Vector2:
@@ -14,7 +14,7 @@ func _ready() -> void:
 func emit_land_sounds_on_event():
 	if active:
 		if character.name == null:
-			character.listen("land",self,"play_land_sound")
+			character.listen("land", self, "play_land_sound")
 
 func play_land_sound():
 	if character.listening_to_inputs:
@@ -62,4 +62,3 @@ func _EndCondition() -> bool:
 	if character.is_on_floor():
 		return true
 	return false
-

@@ -2,14 +2,14 @@ extends Ability
 class_name Charge
 
 
-export var super_charged_sound : AudioStream
+export var super_charged_sound: AudioStream
 var super_charge_time := 3.0
 var maximum_charge_time := 5
-export var color : Color
-export var super_color : Color
-var charged_time : float
-var max_charge : bool
-var mid_charge : bool
+export var color: Color
+export var super_color: Color
+var charged_time: float
+var max_charge: bool
+var mid_charge: bool
 var charging := false
 
 
@@ -37,22 +37,22 @@ signal stop
 
 func _ready() -> void:
 # warning-ignore:return_value_discarded
-	Event.listen("changed_weapon",self,"update_current_weapon")
-	Event.listen("pause_menu_opened",self,"on_pause")
-	Event.listen("pause_menu_closed",self,"on_unpause")
+	Event.listen("changed_weapon", self, "update_current_weapon")
+	Event.listen("pause_menu_opened", self, "on_pause")
+	Event.listen("pause_menu_closed", self, "on_unpause")
 	audio = get_node("audioStreamPlayer")
-	Tools.timer_p(.1,"set_deferred",self,["debug_logs",false])
+	Tools.timer_p(.1, "set_deferred", self, ["debug_logs", false])
 
 func on_pause():
 	if executing:
-		audio.set_stream_paused(true) 
-		audio2.set_stream_paused(true) 
+		audio.set_stream_paused(true)
+		audio2.set_stream_paused(true)
 		tween.pause()
 
 func on_unpause():
 	if executing:
-		audio.set_stream_paused(false) 
-		audio2.set_stream_paused(false) 
+		audio.set_stream_paused(false)
+		audio2.set_stream_paused(false)
 		tween.unpause()
 
 	
@@ -63,10 +63,10 @@ func _Setup():
 func setup_charge_fadeout() -> void:
 	audio.volume_db = charge1_volume
 	audio2.volume_db = charge2_volume
-	if Configurations.get("ChargeFadeOut"): #change for config
-		tween.create(Tween.EASE_IN_OUT,Tween.TRANS_LINEAR,true)
-		tween.add_attribute("volume_db",-80.0,45.0,audio)
-		tween.add_attribute("volume_db",-80.0,45.0,audio2)
+	if Configurations.get("ChargeFadeOut"): # change for config
+		tween.create(Tween.EASE_IN_OUT, Tween.TRANS_LINEAR, true)
+		tween.add_attribute("volume_db", -80.0, 45.0, audio)
+		tween.add_attribute("volume_db", -80.0, 45.0, audio2)
 		tween.set_ignore_pause_mode()
 
 func _process(_delta: float) -> void:
@@ -89,7 +89,7 @@ func _StartCondition() -> bool:
 				return true
 	return false
 
-func _Update(_delta:float) -> void:
+func _Update(_delta: float) -> void:
 	if get_charge_released() and character.listening_to_inputs or get_charge_just_pressed() and character.listening_to_inputs:
 		if charged_time > minimum_charge_time * (1 - charge_time_reduction):
 			emit_fire_charged_signal(get_charge_level())
@@ -107,7 +107,7 @@ func get_default_charge_button() -> String:
 	return "fire"
 
 func get_charge_pressed() -> bool:
-	return get_action_pressed(actions[0]) #or get_action_pressed(actions[1])
+	return get_action_pressed(actions[0]) # or get_action_pressed(actions[1])
 
 func set_current_charge_button() -> void:
 	if get_action_pressed(actions[0]):
@@ -138,13 +138,13 @@ func get_charge_level() -> int:
 func _EndCondition() -> bool:
 	if charged_time == 0 and timer > 0.1:
 		return true
-	if charged_time < minimum_charge_time* (1 - charge_time_reduction) and not get_charge_pressed():
+	if charged_time < minimum_charge_time * (1 - charge_time_reduction) and not get_charge_pressed():
 		return true
 	if character.is_executing("Ride"):
 		return true
 	return false
 	
-func charge(_delta:float):
+func charge(_delta: float):
 	if charged_time < maximum_charge_time:
 		charged_time += _delta
 	if charged_time > minimum_charge_time * (1 - charge_time_reduction):
@@ -164,7 +164,7 @@ func charge(_delta:float):
 				play_super_sound()
 	
 func emit_fire_charged_signal(_charged_time):
-	if character.listening_to_inputs: #prevents firing during cutscenes
+	if character.listening_to_inputs: # prevents firing during cutscenes
 		Log("Shot Release")
 		Event.emit_signal("charged_shot_release", _charged_time)
 	EndAbility()
@@ -234,7 +234,7 @@ func get_current_weapon_ammo() -> float:
 		return 0.0
 	return current_weapon.get_ammo()
 
-func update_current_weapon(_new_weapon = null):
+func update_current_weapon(_new_weapon=null):
 	if arm_cannon.current_weapon:
 		current_weapon = arm_cannon.current_weapon
 

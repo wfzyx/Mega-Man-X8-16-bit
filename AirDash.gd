@@ -15,11 +15,11 @@ var initial_direction := 1
 var initial_sound := true
 
 func _ready() -> void:
-	character.listen("land",self,"reset_airdash_count")
-	character.listen("wallslide",self,"reset_airdash_count")
-	character.listen("walljump",self,"reset_airdash_count")
-	character.listen("dashjump",self,"reduce_airdash_count")
-	character.listen("firedash",self,"firedash_reduce_airdash_count")
+	character.listen("land", self, "reset_airdash_count")
+	character.listen("wallslide", self, "reset_airdash_count")
+	character.listen("walljump", self, "reset_airdash_count")
+	character.listen("dashjump", self, "reduce_airdash_count")
+	character.listen("firedash", self, "firedash_reduce_airdash_count")
 	#character.listen("jump",self,"reset_airdash_count")
 
 func _Setup() -> void:
@@ -83,7 +83,7 @@ func emit_particles(_particles, _value:=false):
 	pass
 
 func _ResetCondition() -> bool:
-	if has_let_go_of_input and Input.is_action_just_pressed(actions[0]): #talvez de problema no futuro, checando input diretamente
+	if has_let_go_of_input and Input.is_action_just_pressed(actions[0]): # talvez de problema no futuro, checando input diretamente
 		if character.get_vertical_speed() > 0:
 			if airjump.active and airjump.current_air_jumps > 0 and airdash_count > 0:
 				airjump.reduce_air_jumps()
@@ -140,5 +140,3 @@ func _EndCondition() -> bool:
 	if pressing_towards_wall() or character.is_on_floor():
 		return true
 	return false
-
-	

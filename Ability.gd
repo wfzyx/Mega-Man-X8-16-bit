@@ -1,19 +1,19 @@
 class_name Ability
 extends BaseAbility
 
-export var actions : Array
+export var actions: Array
 var action := "action name"
-export var animation : String
-export var sound : AudioStream
+export var animation: String
+export var sound: AudioStream
 var input_activation := 0.1
 var input := 0.0
-var last_pressed_input:= ""
+var last_pressed_input := ""
 var last_time_pressed := 0.0
 var has_let_go_of_input := false
 
 func check_for_event_errors() -> void:
 	if actions.size() == 0:
-		push_error("WARNING: " +get_parent().name + "."+ name + " has no actions. Did you forget to append an 'Event' action?")
+		push_error("WARNING: " + get_parent().name + "." + name + " has no actions. Did you forget to append an 'Event' action?")
 
 func Should_Execute() -> bool:
 	if active:
@@ -149,10 +149,10 @@ func play_animation_on_initialize():
 	if animation:
 		play_animation(animation)
 
-func play_animation(anim : String):
+func play_animation(anim: String):
 	character.play_animation(anim)
 	
-func play_animation_once(anim : String):
+func play_animation_once(anim: String):
 	character.play_animation_once(anim)
 
 func get_pressed_direction() -> int:
@@ -177,14 +177,14 @@ func adjust_shot_position_on_initialize():
 	if get_shot_adust_position() != Vector2.ZERO:
 		adjust_shot_position(get_shot_adust_position())
 
-func get_shot_adust_position() -> Vector2: #suposed to be overriden by actions that need adjustment
+func get_shot_adust_position() -> Vector2: # suposed to be overriden by actions that need adjustment
 	return Vector2.ZERO
 
-func adjust_shot_position (shot_adjustment):
-	_commandList.Add(AddVectorCMD.new(character.shot_position,shot_adjustment))
+func adjust_shot_position(shot_adjustment):
+	_commandList.Add(AddVectorCMD.new(character.shot_position, shot_adjustment))
 	
-func set_camera_offset(horizontal_offset := 32.0, duration := 0.5) -> void:
-	Event.emit_signal("camera_offset",Vector2(horizontal_offset * character.get_facing_direction(),0),duration)
+func set_camera_offset(horizontal_offset:=32.0, duration:=0.5) -> void:
+	Event.emit_signal("camera_offset", Vector2(horizontal_offset * character.get_facing_direction(), 0), duration)
 
 func disable_camera_offset() -> void:
 	Log("Disabling camera offset")

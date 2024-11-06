@@ -1,7 +1,7 @@
 extends X8TextureButton
 
 var waiting_for_input = false
-var original_event : InputEvent
+var original_event: InputEvent
 var timer := 0.0
 var old_text := ""
 signal waiting
@@ -9,22 +9,10 @@ signal updated_event
 onready var text: Label = $text
 onready var actionname: Label = $"../actionname"
 
-var doubled_input
-
-func _ready() -> void:
-	InputManager.connect("double_check",self,"check_for_doubles")
-	InputManager.connect("double_detected",self,"double_warning")
-
-func check_for_doubles(new_button_text,_action):
-	pass
-	
-func double_warning(double_button_text, action):
-	pass
-
 func _process(delta: float) -> void:
 	if timer >= 0.01:
 		timer += delta
-		text.self_modulate.a = inverse_lerp(-1,1,sin(timer * 6))
+		text.self_modulate.a = inverse_lerp(-1, 1, sin(timer * 6))
 	if timer > 5:
 		print_debug("waiting cancel")
 		menu.emit_signal("unlock_buttons")
@@ -59,7 +47,7 @@ func _input(event: InputEvent) -> void:
 				set_new_action_event(event)
 
 func set_new_action_event(event) -> void:
-	InputManager.set_new_action_event(get_parent().action,event,original_event)
+	InputManager.set_new_action_event(get_parent().action, event, original_event)
 	emit_signal("updated_event")
 	waiting_for_input = false
 	timer = 0
@@ -80,7 +68,7 @@ func on_press() -> void:
 		grab_focus()
 
 func set_text(txt) -> void:
-	InputManager.emit_signal("double_check",txt,$"../actionname".text)
+	InputManager.emit_signal("double_check", txt, $"../actionname".text)
 	text.text = txt
 
 func get_text() -> String:

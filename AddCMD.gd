@@ -1,6 +1,6 @@
 extends Command
 class_name AddToVector2CMD
-var reference : Actor
+var reference: Actor
 var value := 0.0
 
 func _init(ref, add_value) -> void:

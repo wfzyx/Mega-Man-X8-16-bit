@@ -1,5 +1,5 @@
 extends Jump
-class_name DashJump #essentially the same as DashWallJump
+class_name DashJump # essentially the same as DashWallJump
 
 export var dash_action := "dash"
 var dash_leeway_time := 0.55
@@ -31,4 +31,3 @@ func _StartCondition() -> bool:
 		return ._StartCondition()
 	
 	return false
-

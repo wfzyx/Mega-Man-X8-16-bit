@@ -10,11 +10,11 @@ onready var dash_particle = get_node("dash_particle")
 var ghost_particle
 var sprite_effect
 var _dash
-var emitted_dash  := false
+var emitted_dash := false
 var left_ground_timer := 0.0
 var can_dash := true
 
-export var shot_pos_adjust := Vector2 (18,4)
+export var shot_pos_adjust := Vector2(18, 4)
 func get_shot_adust_position() -> Vector2:
 	return shot_pos_adjust
 
@@ -59,7 +59,7 @@ func _Update(_delta: float) -> void:
 			character.set_vertical_speed(0)
 	else:
 		can_dash = false
-		if left_ground_timer == 0.0: #not left_ground:
+		if left_ground_timer == 0.0: # not left_ground:
 			left_ground_timer = 0.01
 			character.set_vertical_speed(0)
 			invulnerable(false)
@@ -72,11 +72,11 @@ func increase_left_ground_timer(_delta: float) -> void:
 		left_ground_timer += _delta
 
 
-func process_gravity(delta:float, gravity := default_gravity, _s = "null") -> void:
-	.process_gravity(delta,gravity)
+func process_gravity(delta: float, gravity:=default_gravity, _s="null") -> void:
+	.process_gravity(delta, gravity)
 	activate_low_jumpcasts_after_delay(delta)
 
-func on_dash() -> void: #override
+func on_dash() -> void: # override
 	pass
 
 func synchronize_sprite_effect():
@@ -94,11 +94,11 @@ func change_animation_if_falling(_s) -> void:
 func _Interrupt():
 	if not changed_animation:
 		character.call_deferred("increase_hitbox")
-	emit_particles(particles,false)
+	emit_particles(particles, false)
 	invulnerable(false)
 	._Interrupt()
 
-func invulnerable(state : bool):
+func invulnerable(state: bool):
 	if upgraded and invulnerability_duration > 0:
 		if state:
 			character.add_invulnerability(name)
@@ -112,7 +112,7 @@ func process_invulnerability():
 	if upgraded and invulnerability_duration > 0:
 		synchronize_sprite_effect()
 		if timer > invulnerability_duration:
-			invulnerable (false)
+			invulnerable(false)
 
 func should_dash() -> bool:
 	return character.is_on_floor()

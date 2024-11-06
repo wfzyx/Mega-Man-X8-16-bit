@@ -7,7 +7,7 @@ var times := {}
 func reset():
 	times.clear()
 
-func add(section_name,delta):
+func add(section_name, delta):
 	if section_name in times:
 		times[section_name] += delta
 	else:

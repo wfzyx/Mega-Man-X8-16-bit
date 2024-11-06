@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var fade: Sprite = $fade
-onready var tween := TweenController.new(self,false)
+onready var tween := TweenController.new(self, false)
 onready var times_label: Label = $times
 onready var names: Label = $names
 onready var totaltime: Label = $totaltime
@@ -31,7 +31,7 @@ func get_times():
 func _ready() -> void:
 	get_times()
 	fade.modulate = Color.black
-	Tools.timer(0.5,"fadein",self)
+	Tools.timer(0.5, "fadein", self)
 	#Tools.timer(10.0,"fadeout",self)
 
 func _input(event: InputEvent) -> void:
@@ -43,14 +43,14 @@ func fadein():
 		names.modulate = Color.darkblue
 		times_label.modulate = Color.darkblue
 		totaltime.modulate = Color.black
-		tween.attribute("modulate:a",0.0,.5,fade)
-		tween.add_attribute("modulate",Color.white,.5,times_label)
+		tween.attribute("modulate:a", 0.0, .5, fade)
+		tween.add_attribute("modulate", Color.white, .5, times_label)
 		
-		tween.attribute("modulate",Color.darkblue,.5,names)
-		tween.add_attribute("modulate",Color.white,.5,names)
+		tween.attribute("modulate", Color.darkblue, .5, names)
+		tween.add_attribute("modulate", Color.white, .5, names)
 		
-		tween.add_attribute("modulate",Color.darkblue,.5,totaltime)
-		tween.add_attribute("modulate",Color.white,.5,totaltime)
+		tween.add_attribute("modulate", Color.darkblue, .5, totaltime)
+		tween.add_attribute("modulate", Color.white, .5, totaltime)
 		tween.callback("finished_fadein")
 
 var fadein_complete = false
@@ -61,9 +61,9 @@ func fadeout():
 	if not exiting:
 		exiting = true
 		tween.reset()
-		tween.attribute("modulate",Color.darkblue,.5,names)
-		tween.attribute("modulate",Color.darkblue,.5,times_label)
-		tween.add_attribute("modulate:a",1.0,.5,fade)
+		tween.attribute("modulate", Color.darkblue, .5, names)
+		tween.attribute("modulate", Color.darkblue, .5, times_label)
+		tween.add_attribute("modulate:a", 1.0, .5, fade)
 		tween.add_wait(.5)
 		tween.add_callback("next_screen")
 

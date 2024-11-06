@@ -2,7 +2,7 @@ extends Node2D
 
 export var entered_password := "1111111111111111"
 const even := "1225977663272912"
-const odd :=  "1932729259776691"
+const odd := "1932729259776691"
 const zero_all := "46738766824328"
 
 var password_being_tested := "0000000000000000"
@@ -47,44 +47,44 @@ const B6 = "CrystalMines"
 const B7 = "CentralWhite"
 const B8 = "Inferno"
 
-const bosses = [B1,B2,B3,B4,B5,B6,B7,B8]
-const key_locations = [[A1,B7,L5,S1,X1],[A2,B3,L4,S2,X2],
-					   [A3,B6,L2,X3,X6],[A4,B2,L3,X4,X7],
-					   [A5,B5,L1,S3,X5],[A6,B1,L8,L7,S4],
-					   [A7,B4,B8,A8,L6]                 ]
+const bosses = [B1, B2, B3, B4, B5, B6, B7, B8]
+const key_locations = [[A1, B7, L5, S1, X1], [A2, B3, L4, S2, X2],
+					   [A3, B6, L2, X3, X6], [A4, B2, L3, X4, X7],
+					   [A5, B5, L1, S3, X5], [A6, B1, L8, L7, S4],
+					   [A7, B4, B8, A8, L6]]
 
-const keys = {"00" : [],
-"03" : [1],
-"05" : [2],
-"13" : [3],
-"17" : [4],
-"31" : [5],
-"08" : [1,2],
-"16" : [1,3],
-"20" : [1,4],
-"34" : [1,5],
-"18" : [2,3],
-"22" : [2,4],
-"36" : [2,5],
-"30" : [3,4],
-"44" : [3,5],
-"48" : [4,5],
-"21" : [1,2,3],
-"25" : [1,2,4],
-"39" : [1,2,5],
-"33" : [1,3,4],
-"47" : [1,3,5],
-"51" : [1,4,5],
-"35" : [2,3,4],
-"49" : [2,3,5],
-"53" : [2,4,5],
-"61" : [3,4,5],
-"38" : [1,2,3,4],
-"52" : [1,2,3,5],
-"56" : [1,2,4,5],
-"64" : [1,3,4,5],
-"66" : [2,3,4,5],
-"69" : [1,2,3,4,5]}
+const keys = {"00": [],
+"03": [1],
+"05": [2],
+"13": [3],
+"17": [4],
+"31": [5],
+"08": [1, 2],
+"16": [1, 3],
+"20": [1, 4],
+"34": [1, 5],
+"18": [2, 3],
+"22": [2, 4],
+"36": [2, 5],
+"30": [3, 4],
+"44": [3, 5],
+"48": [4, 5],
+"21": [1, 2, 3],
+"25": [1, 2, 4],
+"39": [1, 2, 5],
+"33": [1, 3, 4],
+"47": [1, 3, 5],
+"51": [1, 4, 5],
+"35": [2, 3, 4],
+"49": [2, 3, 5],
+"53": [2, 4, 5],
+"61": [3, 4, 5],
+"38": [1, 2, 3, 4],
+"52": [1, 2, 3, 5],
+"56": [1, 2, 4, 5],
+"64": [1, 3, 4, 5],
+"66": [2, 3, 4, 5],
+"69": [1, 2, 3, 4, 5]}
 
 var show_debug := true
 
@@ -103,7 +103,7 @@ func test_random_password(no_of_tries) -> void:
 
 func enter_random_password() -> void:
 	rng.randomize()
-	var test_password = str(abs(rng.randi_range(111111111111,999999999999)))
+	var test_password = str(abs(rng.randi_range(111111111111, 999999999999)))
 	entered_password = fix_size(test_password)
 
 func crc() -> void:
@@ -113,7 +113,7 @@ func fix_size(test_password) -> String:
 	if test_password.length() < 12:
 		var times = 12 - test_password.length()
 		while times > 0:
-			test_password = test_password.insert(0,"0")
+			test_password = test_password.insert(0, "0")
 			times = times - 1
 	return test_password
 
@@ -121,9 +121,9 @@ func is_valid_password() -> bool:
 	var even_removed = remove_code(even)
 	var odd_removed = remove_code(odd)
 	
-	debug ("Entered: " + entered_password)
-	debug ("Even: " + even_removed)
-	debug ("Odd: " + odd_removed)
+	debug("Entered: " + entered_password)
+	debug("Even: " + even_removed)
+	debug("Odd: " + odd_removed)
 	
 	password_being_tested = even_removed
 	is_any_value_invalid(even_removed)
@@ -133,22 +133,22 @@ func is_valid_password() -> bool:
 	return false
 
 func is_any_value_invalid(password) -> bool:
-	var s1 = password.substr(0,2)
-	var s2 = password.substr(2,2)
-	var s3 = password.substr(4,2)
-	var s4 = password.substr(6,2)
-	var s5 = password.substr(8,2)
-	var s6 = password.substr(10,2)
-	var s7 = password.substr(12,2)
-	var s8 = password.substr(14,2)
-	var allkeys = [s1,s2,s3,s4,s5,s6,s7]
+	var s1 = password.substr(0, 2)
+	var s2 = password.substr(2, 2)
+	var s3 = password.substr(4, 2)
+	var s4 = password.substr(6, 2)
+	var s5 = password.substr(8, 2)
+	var s6 = password.substr(10, 2)
+	var s7 = password.substr(12, 2)
+	var s8 = password.substr(14, 2)
+	var allkeys = [s1, s2, s3, s4, s5, s6, s7]
 	
 	
 	for key in allkeys:
 		if keys.get(key) == null:
 			print_debug("Invalid value: " + key)
 			return true
-	print_debug ("no invalid keys found")
+	print_debug("no invalid keys found")
 	
 	return false
 
@@ -159,11 +159,11 @@ func is_no_of_defeated_bosses_valid(param) -> bool:
 	for order in key_locations:
 		for key in order:
 			if key in bosses:
-				boss_locations.append(Vector2(key_locations.find(order) * 2,order.find(key,0) + 1) )
-	print (boss_locations)
+				boss_locations.append(Vector2(key_locations.find(order) * 2, order.find(key, 0) + 1))
+	print(boss_locations)
 	
 	for location in boss_locations:
-		var value_being_tested = password_being_tested.substr(location.x,2)
+		var value_being_tested = password_being_tested.substr(location.x, 2)
 		print_debug("Checking if value " + str(value_being_tested) + " is in key dictionary")
 		if value_being_tested in keys:
 			print_debug("Found in dictionary, checking if boss element is in place " + str(location.y))
@@ -175,7 +175,7 @@ func is_no_of_defeated_bosses_valid(param) -> bool:
 				pass
 	
 		
-	print ("Total bosses defeated: " + str(total_bosses_defeated))
+	print("Total bosses defeated: " + str(total_bosses_defeated))
 	if total_bosses_defeated == 0 and param != "zero":
 		print_debug("Didn't expect zero. Invalid password")
 		return false
@@ -191,33 +191,33 @@ func is_no_of_defeated_bosses_valid(param) -> bool:
 
 
 func remove_code(code) -> String:
-	var s = sub_duples(entered_password.substr(0,2),code.substr(0,2)) + \
-	sub_duples(entered_password.substr(2,2),code.substr(2,2)) + \
-	sub_duples(entered_password.substr(4,2),code.substr(4,2)) + \
-	sub_duples(entered_password.substr(6,2),code.substr(6,2)) + \
-	sub_duples(entered_password.substr(8,2),code.substr(8,2)) + \
-	sub_duples(entered_password.substr(10,2),code.substr(10,2)) + \
-	sub_duples(entered_password.substr(12,2),code.substr(12,2)) + \
-	sub_duples(entered_password.substr(14,2),code.substr(14,2))
+	var s = sub_duples(entered_password.substr(0, 2), code.substr(0, 2)) + \
+	sub_duples(entered_password.substr(2, 2), code.substr(2, 2)) + \
+	sub_duples(entered_password.substr(4, 2), code.substr(4, 2)) + \
+	sub_duples(entered_password.substr(6, 2), code.substr(6, 2)) + \
+	sub_duples(entered_password.substr(8, 2), code.substr(8, 2)) + \
+	sub_duples(entered_password.substr(10, 2), code.substr(10, 2)) + \
+	sub_duples(entered_password.substr(12, 2), code.substr(12, 2)) + \
+	sub_duples(entered_password.substr(14, 2), code.substr(14, 2))
 	#debug ("Subtracted Even: " + s)
 	return s
 
-func debug (message) -> void:
+func debug(message) -> void:
 	if show_debug:
-		print ("Password: " + message)
+		print("Password: " + message)
 
 func add_duples(value1, value2) -> String:
-	return add(value1.substr(0,1),value2.substr(0,1)) + add(value1.substr(1,1),value2.substr(1,1))
+	return add(value1.substr(0, 1), value2.substr(0, 1)) + add(value1.substr(1, 1), value2.substr(1, 1))
 
 func sub_duples(value1, value2) -> String:
-	return subtract(value1.substr(0,1),value2.substr(0,1)) + subtract(value1.substr(1,1),value2.substr(1,1))
+	return subtract(value1.substr(0, 1), value2.substr(0, 1)) + subtract(value1.substr(1, 1), value2.substr(1, 1))
 	
 
 func add(value1, value2) -> String:
 	var result = int(value1) + int(value2)
 	#debug("Adding " + str(value1) + " + " +str(value2) + " = " + str(result))
 	if result >= 10:
-		result = (str(result).substr(1,1))
+		result = (str(result).substr(1, 1))
 		#debug("Correct: " + result)
 	return str(result)
 	
@@ -225,7 +225,7 @@ func subtract(value1, value2) -> String:
 	var result = int(value1) - int(value2)
 	#debug("Subtracting " + str(value1) + " - " +str(value2) + " = " + str(result))
 	if result <= -1:
-		result = 10 + result 
+		result = 10 + result
 		#debug("Correct: " + str(result))
 	return str(result)
 

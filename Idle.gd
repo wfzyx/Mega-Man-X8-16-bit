@@ -16,7 +16,7 @@ func _Setup() -> void:
 	character.set_horizontal_speed(0)
 	deactivate_low_jumpcasts()
 
-func _Update(_delta:float) -> void:
+func _Update(_delta: float) -> void:
 	character.set_direction(get_pressed_direction())
 	update_bonus_horizontal_only_conveyor()
 

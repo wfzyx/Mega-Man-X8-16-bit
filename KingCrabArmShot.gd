@@ -1,8 +1,8 @@
 extends AttackAbility
 class_name KingCrabArmShot
 
-export (PackedScene) var Projectile
-var missileclaw : Node2D
+export(PackedScene) var Projectile
+var missileclaw: Node2D
 onready var prepare: AudioStreamPlayer2D = $prepare
 onready var shot: AudioStreamPlayer2D = $shot
 onready var receive: AudioStreamPlayer2D = $receive
@@ -25,24 +25,24 @@ func _Update(_delta) -> void:
 			nhecosound.play(0)
 			played_first = false
 		if has_finished_last_animation():
-			missileclaw = instantiate(Projectile) 
+			missileclaw = instantiate(Projectile)
 			missileclaw.set_creator(self)
 			missileclaw.initialize(character.get_facing_direction())
-			Event.emit_signal("screenshake",2)
+			Event.emit_signal("screenshake", 2)
 			shot.play()
 			play_animation("missileclaw_fire")
 			next_attack_stage()
 	
 	elif attack_stage == 1:
 		if timer > 1:
-			if GameManager.is_nearby(self,missileclaw,Vector2(16,16)):
+			if GameManager.is_nearby(self, missileclaw, Vector2(16, 16)):
 				missileclaw.destroy()
 				receive.play()
 				next_attack_stage()
 		
 	elif attack_stage == 2:
 		play_animation_once("missileclaw_recover")
-		Event.emit_signal("screenshake",2)
+		Event.emit_signal("screenshake", 2)
 		next_attack_stage()
 	elif attack_stage == 3:
 		if has_finished_last_animation():

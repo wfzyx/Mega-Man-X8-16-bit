@@ -50,13 +50,13 @@ func change_animation_if_falling(_s) -> void:
 			if character.get_vertical_speed() > 0:
 				EndAbility()
 				#character.start_dashfall()
-func ascent_with_slowdown_after_delay(_delta :float) -> void:
+func ascent_with_slowdown_after_delay(_delta: float) -> void:
 	if not stopped_input and calculate_slowdown_value() != 0:
 		if can_go_up_at_full_velocity():
-			character.set_vertical_speed(-jump_plus_ground_velocity) 
+			character.set_vertical_speed(-jump_plus_ground_velocity)
 			fullspeed_time = fullspeed_time + _delta
 		else:
-			character.set_vertical_speed(-jump_plus_ground_velocity * calculate_slowdown_value()) 
+			character.set_vertical_speed(-jump_plus_ground_velocity * calculate_slowdown_value())
 			slowdown_time = slowdown_time + _delta
 
 func can_go_up_at_full_velocity() -> bool:

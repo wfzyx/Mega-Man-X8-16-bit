@@ -11,17 +11,17 @@ var wallgrab_direction := 0
 
 func _Setup() -> void:
 	character.emit_signal("wallslide")
-	character.set_direction(- get_pressed_direction())
-	wallgrab_direction =  get_pressed_direction()
+	character.set_direction(-get_pressed_direction())
+	wallgrab_direction = get_pressed_direction()
 
 func _Update(_delta: float) -> void:
 	character.set_horizontal_speed(horizontal_speed * wallgrab_direction)
 	if delay_has_expired():
-		emit_particles(particles,true)
+		emit_particles(particles, true)
 		character.set_vertical_speed(jump_velocity)
 
 func _StartCondition() -> bool:
-	if not character.is_on_floor() and not block_timer > 0: 
+	if not character.is_on_floor() and not block_timer > 0:
 		if character.is_colliding_with_wall() != 0:
 			if character.get_vertical_speed() > 0:
 				if get_pressed_direction() == character.is_colliding_with_wall():
@@ -58,7 +58,7 @@ func _Interrupt():
 	if character.get_vertical_speed() > 0:
 		character.set_vertical_speed(40)
 	character.set_horizontal_speed(0)
-	emit_particles(particles,false)
+	emit_particles(particles, false)
 
 func delay_has_expired() -> bool:
 	return timer > start_delay

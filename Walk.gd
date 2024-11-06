@@ -4,7 +4,7 @@ class_name Walk
 var minimum_time := 0.02
 var starting_from_stop := false
 
-export var shot_pos_adjust := Vector2 (6,-2)
+export var shot_pos_adjust := Vector2(6, -2)
 func get_shot_adust_position() -> Vector2:
 	return shot_pos_adjust
 
@@ -33,7 +33,7 @@ func _Interrupt() -> void:
 
 func _Update(_delta: float) -> void:
 	if timer < 0.08 and starting_from_stop:
-		set_movement_and_direction(horizontal_velocity/4)
+		set_movement_and_direction(horizontal_velocity / 4)
 	else:
 		set_movement_and_direction(horizontal_velocity)
 	update_bonus_horizontal_only_conveyor()

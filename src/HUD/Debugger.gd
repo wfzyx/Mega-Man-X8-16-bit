@@ -5,7 +5,7 @@ onready var character = get_tree().current_scene.find_node("X")
 const bike = preload("res://src/Actors/Props/RideChaser.tscn")
 const ridearmor = preload("res://src/Actors/Props/RideArmor/RideArmor.tscn")
 const ridearmor2 = preload("res://src/Actors/Props/RideArmor/RideArmorNoCannon.tscn")
-var last_checkpoint : Node2D
+var last_checkpoint: Node2D
 onready var checkpoints := get_parent().get_parent().get_parent().get_parent().get_node_or_null("Checkpoints")
 var open := false
 onready var main_button: Button = $vBoxContainer/hide_menu
@@ -20,16 +20,16 @@ func _ready() -> void:
 	show_cheats()
 	
 	close_cheats()
-	Event.connect("pause_menu_opened",self,"close_cheats")
-	Event.connect("pause_menu_opened",self,"hide_totally")
-	Event.connect("pause_menu_closed",self,"show_cheats")
-	Event.connect("boss_start",self,"on_boss_start")
+	Event.connect("pause_menu_opened", self, "close_cheats")
+	Event.connect("pause_menu_opened", self, "hide_totally")
+	Event.connect("pause_menu_closed", self, "show_cheats")
+	Event.connect("boss_start", self, "on_boss_start")
 	if checkpoints:
 		if checkpoints.get_child_count() > 0:
-			last_checkpoint = checkpoints.get_child(checkpoints.get_child_count()-1)
+			last_checkpoint = checkpoints.get_child(checkpoints.get_child_count() - 1)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if visible:
 		if Input.is_action_pressed("debug") and Input.is_action_pressed("debug2"):
 			_on_reset_checkpoint_pressed()
@@ -56,21 +56,21 @@ func _on_hide_menu_pressed() -> void:
 	GameManager.used_cheats = true
 	for option in $vBoxContainer.get_children():
 		if option.name != "hide_menu":
-			option.set_visible (not option.is_visible())
+			option.set_visible(not option.is_visible())
 	_on_pause_pressed()
-	emit_signal("cheat_pressed",cheat_buttons.visible)
+	emit_signal("cheat_pressed", cheat_buttons.visible)
 
 func close_cheats():
 	open = false
 	for option in $vBoxContainer.get_children():
 		if option.name != "hide_menu":
-			option.set_visible (false)
+			option.set_visible(false)
 		else:
 			option.pressed = false
 	GameManager.unpause("DebugMenu")
 	
 
-func show_debug(show = true) -> void:
+func show_debug(show=true) -> void:
 	$vBoxContainer.visible = show
 
 func _on_icarus_head_pressed() -> void:
@@ -108,11 +108,11 @@ func _on_inifinte_health_pressed() -> void:
 	character.current_health = 16000
 
 func _on_disable_camera_limits_pressed() -> void:
-	GameManager.camera.set_limits(-100000,100000,-100000,100000)
+	GameManager.camera.set_limits(-100000, 100000, -100000, 100000)
 
 func _on_reset_stage_pressed() -> void:
 	GameManager.checkpoint = null
-	GlobalVariables.set("pitch_black_energized",false)
+	GlobalVariables.set("pitch_black_energized", false)
 	GameManager.restart_level()
 
 func _on_remove_collects_pressed() -> void:
@@ -146,12 +146,12 @@ func _on_120fps_pressed() -> void:
 func _on_144fps_pressed() -> void:
 	set_fps(144)
 
-func set_fps(value :int) -> void:
+func set_fps(value: int) -> void:
 	#if Engine.get_iterations_per_second() != value:
 	print_debug("Engine fps: " + str(Engine.get_iterations_per_second()) + " changing to: " + str(value))
 	Engine.iterations_per_second = value
 	Engine.target_fps = value
-	$"vBoxContainer/hBoxContainer/vBoxContainer/144fps/fps".text= "fps: " + str(Engine.get_iterations_per_second()) + "target: " + str(Engine.target_fps)
+	$"vBoxContainer/hBoxContainer/vBoxContainer/144fps/fps".text = "fps: " + str(Engine.get_iterations_per_second()) + "target: " + str(Engine.target_fps)
 
 func _on_pause_pressed() -> void:
 	if cheat_buttons.visible:
@@ -164,7 +164,7 @@ func _on_start_boss_pressed() -> void:
 
 
 func _on_time_attack_pressed() -> void:
-	$"../Rec Info".set_visible (not $"../Rec Info".is_visible())
+	$"../Rec Info".set_visible(not $"../Rec Info".is_visible())
 	GameManager.time_attack = not GameManager.time_attack
 	GameManager.restart_level()
 	pass # Replace with function body.
@@ -186,10 +186,10 @@ func _on_fullscreen_pressed() -> void:
 func _on_next_checkpoint_pressed() -> void:
 	if not stage_has_checkpoints():
 		return
-	var current_c : int = 0
+	var current_c: int = 0
 	if GameManager.checkpoint:
 		current_c = GameManager.checkpoint.id
-	var next_checkpoint = checkpoints.get_node(str(clamp(current_c + 1,0,int(last_checkpoint.name))))
+	var next_checkpoint = checkpoints.get_node(str(clamp(current_c + 1, 0, int(last_checkpoint.name))))
 	GameManager.set_checkpoint(next_checkpoint.settings)
 	GameManager.restart_level()
 
@@ -199,13 +199,13 @@ func _on_reset_checkpoint_pressed() -> void:
 func _on_previous_checkpoint_pressed() -> void:
 	if not stage_has_checkpoints():
 		return
-	var current_c : int = 0
+	var current_c: int = 0
 	if GameManager.checkpoint:
 		current_c = GameManager.checkpoint.id
 	if current_c <= 1:
 		_on_reset_stage_pressed()
 	else:
-		var previous_checkpoint = checkpoints.get_node(str(clamp(current_c - 1,1,int(last_checkpoint.name))))
+		var previous_checkpoint = checkpoints.get_node(str(clamp(current_c - 1, 1, int(last_checkpoint.name))))
 		GameManager.set_checkpoint(previous_checkpoint.settings)
 		GameManager.restart_level()
 	
@@ -220,12 +220,12 @@ func _on_teleport_to_boss_pressed() -> void:
 
 func _on_spawn_bike_pressed() -> void:
 	var instance = bike.instance()
-	get_tree().current_scene.add_child(instance,true)
-	instance.set_position(GameManager.get_player_position()) 
+	get_tree().current_scene.add_child(instance, true)
+	instance.set_position(GameManager.get_player_position())
 
 
 func _on_mute_music_pressed() -> void:
-	AudioServer.set_bus_mute(2,!AudioServer.is_bus_mute(2))
+	AudioServer.set_bus_mute(2, !AudioServer.is_bus_mute(2))
 
 
 func _on_intro_stage_pressed() -> void:
@@ -239,7 +239,7 @@ func _on_subtank1_pressed() -> void:
 		if not subtank.active:
 			GameManager.player.equip_subtank(subtank.subtank.id)
 			GameManager.add_collectible_to_savedata(subtank.subtank.id)
-			GlobalVariables.set(subtank.subtank.id,0)
+			GlobalVariables.set(subtank.subtank.id, 0)
 			break
 
 
@@ -263,7 +263,7 @@ func _on_unlock_weapons_pressed() -> void:
 
 func _on_spawn_ridearm_pressed() -> void:
 	var instance = ridearmor.instance()
-	get_tree().current_scene.add_child(instance,true)
+	get_tree().current_scene.add_child(instance, true)
 	var armor_pos = GameManager.get_player_position()
 	armor_pos.y -= 16
 	instance.set_position(armor_pos)
@@ -276,7 +276,7 @@ func _on_stage_select_pressed() -> void:
 func _on_fill_subtank_pressed() -> void:
 	GameManager.fill_subtanks()
 
-const all_hearts = ["life_up_panda","life_up_yeti","life_up_manowar","life_up_rooster","life_up_trilobyte","life_up_mantis","life_up_antonion","life_up_sunflower"]
+const all_hearts = ["life_up_panda", "life_up_yeti", "life_up_manowar", "life_up_rooster", "life_up_trilobyte", "life_up_mantis", "life_up_antonion", "life_up_sunflower"]
 
 func _on_add_heart_pressed() -> void:
 	for heart in all_hearts:
@@ -299,7 +299,7 @@ func remove_heart(collectible_name) -> void:
 			GameManager.player.reduce_health(2)
 		GameManager.remove_collectible_from_savedata(collectible_name)
 
-var bosses : Array
+var bosses: Array
 func on_boss_start(boss):
 	bosses.append(boss)
 
@@ -317,22 +317,22 @@ func _on_seraph_lumine_pressed() -> void:
 
 
 func _on_rooster_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","rooster")
+	Event.emit_signal("gateway_crystal_get", "rooster")
 func _on_manow_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","manowar")
+	Event.emit_signal("gateway_crystal_get", "manowar")
 func _on_trilo_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","trilobyte")
+	Event.emit_signal("gateway_crystal_get", "trilobyte")
 func _on_sunf_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","sunflower")
+	Event.emit_signal("gateway_crystal_get", "sunflower")
 func _on_yeti_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","yeti")
+	Event.emit_signal("gateway_crystal_get", "yeti")
 func _on_panda_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","panda")
+	Event.emit_signal("gateway_crystal_get", "panda")
 func _on_mantis_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","mantis")
+	Event.emit_signal("gateway_crystal_get", "mantis")
 
 func _on_anton_crystal_pressed() -> void:
-	Event.emit_signal("gateway_crystal_get","antonion")
+	Event.emit_signal("gateway_crystal_get", "antonion")
 	pass # Replace with function body.
 
 
@@ -347,7 +347,7 @@ func _on_gateway_final_pressed() -> void:
 
 
 func _on_sss_rank_pressed() -> void:
-	GlobalVariables.set("RankSSS",true)
+	GlobalVariables.set("RankSSS", true)
 	pass # Replace with function body.
 
 
@@ -358,8 +358,6 @@ func _on_set_seed_text_entered(new_text: String) -> void:
 	else:
 		pass
 	pass # Replace with function body.
-
-
 
 
 func _on_gateway_pressed() -> void:
@@ -374,9 +372,9 @@ func _on_igtscreen_pressed() -> void:
 
 func _on_spawn_gridearm_pressed() -> void:
 	var instance = ridearmor2.instance()
-	get_tree().current_scene.add_child(instance,true)
+	get_tree().current_scene.add_child(instance, true)
 	var armor_pos = GameManager.get_player_position()
 	armor_pos.y -= 16
-	instance.current_health = instance.current_health/2
+	instance.current_health = instance.current_health / 2
 	instance.set_position(armor_pos)
 	pass # Replace with function body.

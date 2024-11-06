@@ -21,9 +21,9 @@ func _Setup() -> void:
 	._Setup()
 	emitted_jump_signal = false
 	character.emit_signal("walljump")
-	walljump_direction = - character.is_in_reach_for_walljump()
-	character.set_direction(- walljump_direction)
-	maximum_moveaway = horizontal_velocity 
+	walljump_direction = -character.is_in_reach_for_walljump()
+	character.set_direction(-walljump_direction)
+	maximum_moveaway = horizontal_velocity
 	moveaway = horizontal_velocity * walljump_direction
 	headbumped = false
 	particles.emitting = true
@@ -33,7 +33,7 @@ func _Setup() -> void:
 	character.position.x = character.position.x + 2 * walljump_direction
 	character.position.y = character.position.y - 2
 
-func _Update(delta:float) -> void:
+func _Update(delta: float) -> void:
 	if not execute_dashwalljump_on_input():
 		._Update(delta)
 
@@ -67,7 +67,7 @@ func has_released_input_and_is_pressing_again() -> bool:
 func _EndCondition() -> bool:
 	if timer > 0.05 + start_delay:
 		if facing_a_wall() and character.get_vertical_speed() > 0:
-			return true 
+			return true
 	
 	return ._EndCondition()
 
@@ -75,21 +75,21 @@ func if_no_input_zero_vertical_speed() -> void:
 	if timer > move_away_duration:
 		.if_no_input_zero_vertical_speed()
 
-func set_movement_and_direction(horizontal_speed:float, _delta:= 0.016) -> void:
+func set_movement_and_direction(horizontal_speed: float, _delta:=0.016) -> void:
 	if delay_has_expired():
 		if delay_and_move_away_duration_have_expired():
 			.set_movement_and_direction(horizontal_speed)
 		else:
 			move_away_from_wall(_delta)
 
-func ascent_with_slowdown_after_delay(_delta :float) -> void:
+func ascent_with_slowdown_after_delay(_delta: float) -> void:
 	if delay_has_expired():
 		if not emitted_jump_signal:
 			character.emit_signal("jump")
 			emitted_jump_signal = true
 		.ascent_with_slowdown_after_delay(_delta)
 
-func process_gravity(_delta:float, gravity := default_gravity, _s = "null") -> void:
+func process_gravity(_delta: float, gravity:=default_gravity, _s="null") -> void:
 	if delay_has_expired():
 		.process_gravity(_delta, gravity)
 
@@ -99,8 +99,8 @@ func move_away_from_wall(_delta: float):
 func pressing_towards_wall() -> bool:
 	return get_pressed_direction() != 0 and get_pressed_direction() != walljump_direction
 
-func calculate_reducing_move_away_speed(_delta : float) -> float:
-	return moveaway - (horizontal_velocity)  * _delta * walljump_direction
+func calculate_reducing_move_away_speed(_delta: float) -> float:
+	return moveaway - (horizontal_velocity) * _delta * walljump_direction
 
 func move_away_speed_down_to_zero():
 	return walljump_direction == 1 and moveaway < 0 or \

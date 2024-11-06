@@ -2,7 +2,7 @@ extends Movement
 class_name Attack
 
 export var start_signal := ""
-export var animations : Array
+export var animations: Array
 var current_index := 0
 var current_animation := ""
 onready var ia := get_parent().get_node("Artificial Intelligence")
@@ -10,10 +10,10 @@ onready var ia := get_parent().get_node("Artificial Intelligence")
 func _ready() -> void:
 	if active:
 # warning-ignore:return_value_discarded
-		get_parent().get_node("animatedSprite").connect("animation_finished",self,"animation_change")
+		get_parent().get_node("animatedSprite").connect("animation_finished", self, "animation_change")
 		if start_signal != "":
 # warning-ignore:return_value_discarded
-			ia.connect(start_signal,self,"start_by_signal")
+			ia.connect(start_signal, self, "start_by_signal")
 
 func should_start() -> bool:
 	return not executing and character.has_health()
@@ -54,7 +54,7 @@ func fire() -> void:
 	play_sound(sound)
 	pass
 
-func play_animation(anim:String, frame := 0):
+func play_animation(anim: String, frame:=0):
 	character.animatedSprite.play(anim)
 	character.animatedSprite.set_frame(frame)
 

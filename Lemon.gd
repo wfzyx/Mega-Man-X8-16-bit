@@ -11,14 +11,14 @@ func references_setup(direction):
 	animatedSprite.scale.x = direction
 	$particles2D.scale.x = direction
 	update_facing_direction()
-	$animatedSprite.set_frame(int(rand_range(0,8)))
+	$animatedSprite.set_frame(int(rand_range(0, 8)))
 	original_pitch = audio.pitch_scale
 
 func process_hittime(delta):
 	if hit_time > 0:
 		hit_time += delta
 
-	if hit_time > time_outside_screen /3:
+	if hit_time > time_outside_screen / 3:
 		disable_particle_visual()
 
 func hit(target):
@@ -40,9 +40,8 @@ func deflect(_body) -> void:
 	.deflect(_body)
 	$deflect_particle.emit(facing_direction)
 
-func launch_setup(direction, _launcher_velocity := 0.0):
+func launch_setup(direction, _launcher_velocity:=0.0):
 	set_horizontal_speed(horizontal_velocity * direction)
 
 func disable_damage():
 	$collisionShape2D.disabled = true
-	

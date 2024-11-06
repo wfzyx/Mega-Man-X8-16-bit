@@ -1,8 +1,8 @@
 extends Ability
 class_name Shot
 
-export var normal_sprites : SpriteFrames
-export var arm_pointing_sprites : SpriteFrames
+export var normal_sprites: SpriteFrames
+export var arm_pointing_sprites: SpriteFrames
 export var default_arm_point_duration := 0.3
 export var infinite_regular_ammo := false
 export var infinite_charged_ammo := false
@@ -16,8 +16,8 @@ func _ready() -> void:
 	if active:
 		update_list_of_weapons()
 		set_buster_as_weapon()
-		Event.listen("shot_layer_disabled",self,"on_shot_layer_disabled")
-		Event.listen("shot_layer_enabled",self,"on_shot_layer_enabled")
+		Event.listen("shot_layer_disabled", self, "on_shot_layer_disabled")
+		Event.listen("shot_layer_enabled", self, "on_shot_layer_enabled")
 
 func _StartCondition() -> bool:
 	if current_weapon:
@@ -26,7 +26,7 @@ func _StartCondition() -> bool:
 
 func _Setup():
 	next_shot_ready = false
-	fire (current_weapon)
+	fire(current_weapon)
 
 func _EndCondition() -> bool:
 	return not character.is_executing("Forced") and not Input.is_action_just_pressed(actions[0]) and Has_time_ran_out()
@@ -46,7 +46,7 @@ func got_hit() -> bool:
 			return true
 	return false
 
-func _Update(_delta:float) -> void:
+func _Update(_delta: float) -> void:
 	if got_hit():
 		return
 	
@@ -86,7 +86,7 @@ func enable_animation_layer():
 	Event.emit_signal("shot_layer_enabled")
 	disabled_layer = false
 
-func fire (weapon):
+func fire(weapon):
 	enable_animation_layer()
 	restart_animation()
 	weapon.fire(0)
@@ -96,13 +96,13 @@ func restart_animation():
 	if character.get_animation() == "recover":
 		character.animatedSprite.set_frame(1)
 
-func action_pressed() -> bool :
+func action_pressed() -> bool:
 	for input in actions:
 		if character.get_action_pressed(input):
 			return true
 	return false
 	
-func action_just_pressed() -> bool :
+func action_just_pressed() -> bool:
 	for input in actions:
 		if character.get_action_just_pressed(input):
 			return true
